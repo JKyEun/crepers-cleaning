@@ -1,6 +1,7 @@
 const studentForm = document.querySelector('#student-form');
 const studentInput = document.querySelector('#student-form input');
 const studentList = document.querySelector('#student-list');
+const studentListButton = document.querySelector("#student-list-button");
 let students = [];
 const STUDENTS_KEY = "students";
 const STUDENTSFIN_KEY = "studentsfin";
@@ -45,6 +46,7 @@ function studentSubmit(event) {
 function studentFinSubmit(event) {
     event.preventDefault();
     studentForm.classList.add('hidden');
+    studentListButton.classList.add('hidden');
     localStorage.setItem(STUDENTSFIN_KEY, JSON.stringify(students));
 }
 
@@ -61,5 +63,6 @@ if (savedStudents != null) {
 
 if (savedStudentsFin === null) {
     studentForm.classList.remove('hidden');
+    studentListButton.classList.remove('hidden');
     document.querySelector('#fin-button').addEventListener("click", studentFinSubmit);
 }
