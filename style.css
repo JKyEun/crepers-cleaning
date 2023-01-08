@@ -1,3 +1,16 @@
 .hidden {
     display: none;
 }
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+#yearmonth-form {
+    text-align: center;
+}

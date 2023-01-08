@@ -18,6 +18,22 @@
     <ul id="student-list"></ul>
     <input type="button" id="fin-button" value="명단 작성 완료!"/>
     </div>
+    <table class="hidden" id="week-table">
+        <tr>
+            <th>이름</th>
+            <th>안되는 요일 체크<br>(월 화 수 목 금)</th>
+        </tr>
+    </table>
+    <br>
+    <form class="hidden" id="yearmonth-form">
+        청소 일정을 만들 연도와 월을 아래 형식에 맞게 입력하세요!<br>
+        <input id="yearmonth-input" required
+        maxlength="15"
+        type="text"
+        placeholder="ex) 2023 9"/>
+        <input type="button" id="fin-button2" value="작성 완료!"/>
+    </form>
     <script src="js/student-list.js"></script>
+    <script src="js/insert-information.js"></script>
 </body>
 </html>

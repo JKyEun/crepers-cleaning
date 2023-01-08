@@ -47,6 +47,8 @@ function studentFinSubmit(event) {
     event.preventDefault();
     studentForm.classList.add('hidden');
     studentListButton.classList.add('hidden');
+    document.querySelector('#week-table').classList.remove('hidden');
+    document.querySelector('#yearmonth-form').classList.remove('hidden');
     localStorage.setItem(STUDENTSFIN_KEY, JSON.stringify(students));
 }
 
@@ -65,4 +67,9 @@ if (savedStudentsFin === null) {
     studentForm.classList.remove('hidden');
     studentListButton.classList.remove('hidden');
     document.querySelector('#fin-button').addEventListener("click", studentFinSubmit);
+}
+
+if (savedStudentsFin != null) {
+    document.querySelector('#week-table').classList.remove('hidden');
+    document.querySelector('#yearmonth-form').classList.remove('hidden');
 }
