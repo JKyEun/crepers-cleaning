@@ -16,6 +16,7 @@
     - isChecked()는 체크박스가 체크되어있는지에 대한 정보를 배열에 저장하여 localStorage에 업로드한다.
     - getYearMonth()는 연도와 월을 입력받는다.
     - informationSubmit은 #fin-button2를 클릭하면 실행되며, isChecked(), getYearMonth()를 실행하고 #week-table표와 #yearmonth-form을 보이지 않게 한다.
-- [ ] 청소 일정을 생성 후 달력에 표시하는 기능
-- [ ] 청소 일정표를 png파일로 저장하는 기능
+- [X] 해당 기간의 달력을 표시하는 기능
+- [ ] 청소 일정을 정하여 달력에 입력하는 기능
 - [ ] 처음부터 다시 시작하는 기능 (학생 리스트는 지우지 않음)
+- [ ] 청소 일정표를 이미지 파일로 저장하는 기능

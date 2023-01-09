@@ -26,14 +26,33 @@
     </table>
     <br>
     <form class="hidden" id="yearmonth-form">
-        청소 일정을 만들 연도와 월을 아래 형식에 맞게 입력하세요!<br>
+        학기 시작일과 학기 종료일을 아래 형식에 맞게 입력하세요!<br>
         <input id="yearmonth-input" required
-        maxlength="15"
+        maxlength="30"
         type="text"
-        placeholder="ex) 2023 9"/>
-        <input type="button" id="fin-button2" value="작성 완료!"/>
+        placeholder="ex) 2023.9.1~2023.12.14"/>
+        <input type="button" id="fin-button2" value="작성 완료"/>
     </form>
+    <div id='calender' class='rap hidden'>
+        <div class="header">
+            <h2 class='dateTitle'></h2>
+            <div class="buttons">
+                <button>처음으로</button> <button>이미지로 저장</button>
+            </div>
+        </div>  
+        <div class="grid dateHead">
+          <div>일</div>
+          <div>월</div>
+          <div>화</div>
+          <div>수</div>
+          <div>목</div>
+          <div>금</div>
+          <div>토</div>
+        </div>
+        <div class="grid dateBoard"></div>
+      </div>
     <script src="js/student-list.js"></script>
     <script src="js/insert-information.js"></script>
+    <script src="js/calender-show.js"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ function makeTable() {
             const checkBox = document.createElement('input');
             checkBox.type = 'checkbox';
             checkBox.name = 'checkbox';
-             td2.appendChild(checkBox);
+            td2.appendChild(checkBox);
         }
     }
 }
@@ -43,8 +43,10 @@ function getYearMonth() {
 function informationSubmit(event) {
     isChecked();
     getYearMonth();
+    document.querySelector(`#calender`).classList.remove('hidden');
     document.querySelector('#week-table').classList.add('hidden');
     document.querySelector('#yearmonth-form').classList.add('hidden');
+    location.reload();
 }
 
 makeTable();
