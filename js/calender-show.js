@@ -216,7 +216,7 @@ function makeCleaningSchedule() {
 
         let newI = '';
         if (i < 10) {
-            newI = parseInt('0' + String(i));
+            newI = '0' + String(i);
         } else {
             newI = i
         }
@@ -343,6 +343,7 @@ if (yearMonth != null) {
     makeStudentsObj();
     makeCalendar();
     makeCleaningSchedule();
+    console.log(studentsObj);
     document.querySelector(`#calender`).classList.remove('hidden');
 }
 
