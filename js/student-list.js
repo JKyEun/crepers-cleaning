@@ -6,6 +6,10 @@ let students = [];
 const STUDENTS_KEY = "students";
 const STUDENTSFIN_KEY = "studentsfin";
 
+function showStudentsNum() {
+    document.querySelector('#student-num').innerText = `${students.length}명`;
+}
+
 function saveStudents() {
     localStorage.setItem(STUDENTS_KEY, JSON.stringify(students));
 }
@@ -15,6 +19,7 @@ function deleteStudent(event) {
     li.remove();
     students = students.filter((s) => s.id !== parseInt(li.id));
     saveStudents();
+    showStudentsNum();
 }
 
 function addStudent(newStudent) {
@@ -28,6 +33,7 @@ function addStudent(newStudent) {
     li.appendChild(span);
     li.appendChild(button);
     studentList.appendChild(li);
+    showStudentsNum();
 }
 
 function studentSubmit(event) {
