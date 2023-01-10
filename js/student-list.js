@@ -50,6 +50,7 @@ function studentFinSubmit(event) {
     document.querySelector('#week-table').classList.remove('hidden');
     document.querySelector('#yearmonth-form').classList.remove('hidden');
     localStorage.setItem(STUDENTSFIN_KEY, JSON.stringify(students));
+    location.reload();
 }
 
 document.addEventListener("submit", studentSubmit)
