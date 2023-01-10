@@ -42,6 +42,14 @@ td {
     border-radius: 5px;
     border: 1px solid #eee;
   }
+
+.red {
+    color: red !important;
+  }
+
+.blue {
+    color: blue !important;
+}
   
   .noColor {
     background: #eee;

@@ -237,6 +237,10 @@ function makeCleaningSchedule() {
             document.querySelector(`#M${startMonth}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
             studentsObj[count]['cleaning_num']++;
             count = 0;
+        } else if (currentDay == 6) {
+            document.querySelector(`#M${startMonth}day${i}`).classList.add('blue');
+        } else {
+            document.querySelector(`#M${startMonth}day${i}`).classList.add('red');
         }
     }
     
@@ -270,6 +274,10 @@ function makeCleaningSchedule() {
             document.querySelector(`#M${startMonth+1}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
             studentsObj[count]['cleaning_num']++;
             count = 0;
+        } else if (currentDay == 6) {
+            document.querySelector(`#M${startMonth+1}day${i}`).classList.add('blue');
+        } else {
+            document.querySelector(`#M${startMonth+1}day${i}`).classList.add('red');
         }
     }
 
@@ -303,6 +311,10 @@ function makeCleaningSchedule() {
             document.querySelector(`#M${startMonth+2}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
             studentsObj[count]['cleaning_num']++;
             count = 0;
+        } else if (currentDay == 6) {
+            document.querySelector(`#M${startMonth+2}day${i}`).classList.add('blue');
+        } else {
+            document.querySelector(`#M${startMonth+2}day${i}`).classList.add('red');
         }
     }
 
@@ -335,9 +347,19 @@ function makeCleaningSchedule() {
             document.querySelector(`#M${startMonth+3}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
             studentsObj[count]['cleaning_num']++;
             count = 0;
+        } else if (currentDay == 6) {
+            document.querySelector(`#M${startMonth+3}day${i}`).classList.add('blue');
+        } else {
+            document.querySelector(`#M${startMonth+3}day${i}`).classList.add('red');
         }
     }
 }
+
+function showNum() {
+    alert(cleaningNum);
+}
+
+document.querySelector('#show-cleaning-num').addEventListener('click', showNum);
 
 if (yearMonth != null) {
     makeStudentsObj();
@@ -346,6 +368,13 @@ if (yearMonth != null) {
     console.log(studentsObj);
     document.querySelector(`#calender`).classList.remove('hidden');
 }
+
+let cleaningNum = '';
+for (let i = 0; i < studentsObj.length; i++) {
+    cleaningNum += `${studentsObj[i]['name']} : ${studentsObj[i]['cleaning_num']}번\n`; 
+}
+
+console.log(cleaningNum);
 
 if (yearMonth == null) {
     document.querySelector(`#calender`).classList.add('hidden');
