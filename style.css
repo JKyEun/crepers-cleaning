@@ -1,84 +1,148 @@
-.hidden {
-    display: none;
-}
-
-table {
-    width: 100%;
-    text-align: center;
-}
-
-td {
-    text-align: center;
-}
-
-#yearmonth-form {
-    text-align: center;
-}
-
-.dateHead div {
-    background: #e31b20;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap: 5px;
-  }
-  
-  .grid div {
-    padding: .6rem;
-    font-size: .9rem;
-    cursor: pointer;
-  }
-  
-  .dateBoard div {
-    color: #222;
-    font-weight: bold;
-    min-height: 6rem;
-    padding: .6rem .8rem;
-    border-radius: 5px;
-    border: 1px solid #eee;
-  }
-
-.red {
-    color: red !important;
-  }
-
-.blue {
-    color: blue !important;
-}
-  
-  .noColor {
-    background: #eee;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-  }
-  
   /* ---- */
   
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+.hidden {
+  display: none;
+}
+
+.basic-page {
+  text-align: center;
+  line-height: 30px;
+  font-family: Pretendard;
+}
+
+.text-input {
+  text-align: center;
+  padding : 3px;
+  margin: 11px;
+  max-width: 420px;
+  width: 100%;
+}
+
+table {
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 820px;
+  text-align: center;
+}
+
+th {
+  background: #e31b20;
+  color: #fff;
+  border-radius: 10px;
+}
+
+td {
+  background: #f5f6fa;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.checkbox {
+  margin: 3px;
+}
+
+#yearmonth-form {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.dateHead div {
+  background: #e31b20;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+}
   
-  * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    box-sizing: border-box;  
-    font-family: Pretendard;
-  }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+}
   
-  .rap {
-    max-width: 820px;
-    padding: 0 1.4rem;
-    margin-top: 1.4rem;
-  }
+.grid div {
+  padding: .6rem;
+  font-size: .9rem;
+  cursor: pointer;
+}
   
-  .dateHead {
-    margin: .4rem 0;
-  }
+.dateBoard div {
+  color: #222;
+  font-weight: bold;
+  min-height: 6rem;
+  padding: .6rem .8rem;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+
+.red {
+  color: red !important;
+}
+
+.blue {
+  color: blue !important;
+}
+  
+.noColor {
+  background: #eee;
+}
+  
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.btn {
+  padding: 7px;
+  margin: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f5f6fa;
+}
+
+.btn:hover {
+  background-color: #dcdde1;
+}
+
+.btn:active {
+  transform: scale(0.90);
+  background-color: #dcdde1;
+}
+  
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;  
+  font-family: Pretendard;
+  font-size: 20px;
+}
+  
+.rap {
+  max-width: 820px;
+  padding: 0 1.4rem;
+  margin:0 auto;
+  margin-bottom: 50px;
+}
+  
+.dateHead {
+  margin: .4rem 0;
+}
+
+li {
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#student-num {
+  clear: left;
+  font-size: 25px;
+}
+
+h2 {
+  font-size : 25px;
+}

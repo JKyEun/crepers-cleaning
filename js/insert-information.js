@@ -17,6 +17,7 @@ function makeTable() {
             const checkBox = document.createElement('input');
             checkBox.type = 'checkbox';
             checkBox.name = 'checkbox';
+            checkBox.classList.add("checkbox");
             td2.appendChild(checkBox);
         }
     }

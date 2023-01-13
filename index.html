@@ -6,19 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crepers Cleaning</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="crepers-favicon.png" />
 </head>
 <body>
+    <div class="basic-page">
     <form class="hidden" id="student-form">
-        <input required
-        maxlength="15"
-        type="text"
-        placeholder="청소명단을 입력하세요!"/>
+        <input class='text-input'
+        required maxlength="15" type="text" placeholder="청소명단을 입력하세요 (Enter로 입력)"/>
     </form>
     <div class="hidden" id="student-list-button">
     <ul id="student-list"></ul>
     <div id="student-num"></div>
-    <input type="button" id="fin-button" value="명단 작성 완료!"/>
+    <input type="button" id="fin-button" class="btn" value="명단 작성 완료"/>
     </div>
+    </div>
+    <div class="basic-page">
     <table class="hidden" id="week-table">
         <tr>
             <th>이름</th>
@@ -27,18 +29,19 @@
     </table>
     <br>
     <form class="hidden" id="yearmonth-form">
-        학기 시작일과 학기 종료일을 아래 형식에 맞게 입력하세요!<br>
-        <input id="yearmonth-input" required
+        학기 시작일과 학기 종료일을 아래 형식에 맞게 입력하세요<br>
+        <input id="yearmonth-input" class="text-input" required
         maxlength="30"
         type="text"
         placeholder="ex) 2023.9.1~2023.12.14"/>
-        <input type="button" id="fin-button2" value="작성 완료"/>
+        <input type="button" id="fin-button2" class="btn" value="작성 완료"/>
     </form>
+    </div>
     <div id='calender' class='rap hidden'>
         <div class="header">
             <h2 class='dateTitle'></h2>
             <div class="buttons">
-                <button id="go-first">처음으로</button> <button id="show-cleaning-num">학생별 청소횟수 확인</button>
+                <button id="go-first" class="btn">처음으로</button><button id="show-cleaning-num" class="btn">학생별 청소횟수</button>
             </div>
         </div>  
         <div class="grid dateHead">

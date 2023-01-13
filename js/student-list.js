@@ -29,6 +29,7 @@ function addStudent(newStudent) {
     span.innerText = newStudent.text;
     const button = document.createElement("button");
     button.innerText = "❌";
+    button.classList.add('btn');
     button.addEventListener("click", deleteStudent);
     li.appendChild(span);
     li.appendChild(button);
