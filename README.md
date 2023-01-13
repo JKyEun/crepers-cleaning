@@ -53,6 +53,7 @@
     <img width="921" alt="스크린샷 2023-01-13 오전 11 37 38" src="https://user-images.githubusercontent.com/108623656/212240168-5b5a1c05-f79e-48aa-8f4d-828041b100eb.png">
 
 5. '작성 완료' 버튼을 누르면 청소표가 만들어진다.
+    - 공휴일과 주말은 청소일정에 포함하지 않는다.
     - '작성 완료' 버튼 클릭 후 모습
     <img width="920" alt="스크린샷 2023-01-13 오전 11 38 02" src="https://user-images.githubusercontent.com/108623656/212240360-aa0ff292-da39-4543-b78b-ef19f19fbab8.png">
 
