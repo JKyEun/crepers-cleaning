@@ -41,7 +41,14 @@ function getYearMonth() {
     localStorage.setItem('yearmonth', JSON.stringify(yearMonth));
 }
 
+function preventNextStep2() {
+    alert('학기 시작일과 종료일이 입력되지 않았습니다.');
+}
+
 function informationSubmit(event) {
+    if (document.getElementById('yearmonth-input').value == '') {
+        return preventNextStep2();
+    }
     isChecked();
     getYearMonth();
     document.querySelector(`#calender`).classList.remove('hidden');

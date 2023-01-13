@@ -50,8 +50,15 @@ function studentSubmit(event) {
     saveStudents(newStudent);
 }
 
+function preventNextStep() {
+    alert('청소명단이 입력되지 않았습니다.');
+}
+
 function studentFinSubmit(event) {
     event.preventDefault();
+    if (students.length == 0) {
+        return preventNextStep()
+    }
     studentForm.classList.add('hidden');
     studentListButton.classList.add('hidden');
     document.querySelector('#week-table').classList.remove('hidden');
