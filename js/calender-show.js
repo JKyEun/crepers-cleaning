@@ -1,17 +1,18 @@
-const yearMonth = localStorage.getItem('yearmonth');
-const startEndDate = JSON.parse(yearMonth).split('~');
-const startYear = parseInt(startEndDate[0].split('.')[0]);
-const startMonth = parseInt(startEndDate[0].split('.')[1]);
-const startDay = parseInt(startEndDate[0].split('.')[2]);
-const endYear = parseInt(startEndDate[1].split('.')[0]);
-const endMonth = parseInt(startEndDate[1].split('.')[1]);
-const endDay = parseInt(startEndDate[1].split('.')[2]);
-const getCheckArr = JSON.parse(localStorage.getItem('checkArr'))
+const yearMonth = JSON.parse(localStorage.getItem('yearmonth'));
+const startYear = parseInt(yearMonth[0]);
+const startMonth = parseInt(yearMonth[1]);
+const startDay = parseInt(yearMonth[2]);
+const endYear = parseInt(yearMonth[3]);
+const endMonth = parseInt(yearMonth[4]);
+const endDay = parseInt(yearMonth[5]);
 
 const date = new Date(startYear, (startMonth-1), startDay);
 const firstDay = date.getDay();
 let lastDay = new Date(startYear, startMonth, 0).getDate();
-
+let newStartMonth = '';
+let studentsObj = [];
+let cleaningNum = '';
+let isHiding = true;
 const holidays = [
 20230101,
 20230121,
@@ -139,7 +140,6 @@ const holidays = [
 20291225
 ]
 
-let newStartMonth = '';
 function getZero(Month) {
     if (Month < 10) {
         newStartMonth = '0'+String(Month);
@@ -147,7 +147,6 @@ function getZero(Month) {
         newStartMonth = Month;
     }
 }
-getZero(startMonth);
 
 function makeCalendar() {
     let htmlDummy = '';
@@ -183,7 +182,6 @@ function makeCalendar() {
     `${startYear}년 ${startMonth}월, ${startMonth+1}월, ${startMonth+2}월, ${startMonth+3}월`;
 }
 
-let studentsObj = [];
 function makeStudentsObj() {
     for (let i = 0; i < studentName.length; i++) {
         studentsObj[i] = {
@@ -256,7 +254,6 @@ function makeCleaningSchedule() {
         } else {
             newI = i
         }
-
         getZero(startMonth+1);
         currentDate = parseInt(String(startYear) + String(newStartMonth) + String(newI));
         if (currentDay != 0 && currentDay != 6 && !(holidays.includes(currentDate))) {
@@ -359,22 +356,34 @@ function showNum() {
     alert(cleaningNum);
 }
 
-document.querySelector('#show-cleaning-num').addEventListener('click', showNum);
+function showCleaningNum() {
+    if (isHiding) {
+        document.querySelector('#cleaning-num').innerText = cleaningNum;
+        document.querySelector('#cleaning-num').classList.remove('hidden');
+        isHiding = false;
+        document.querySelector('#show-cleaning-num').innerText = '학생별 청소횟수 닫기';
+    } else {
+        document.querySelector('#cleaning-num').innerText = '';
+        document.querySelector('#cleaning-num').classList.add('hidden');
+        isHiding = true;
+        document.querySelector('#show-cleaning-num').innerText = '학생별 청소횟수 보기';
+    }
+}
+
+getZero(startMonth);
 
 if (yearMonth != null) {
     makeStudentsObj();
     makeCalendar();
     makeCleaningSchedule();
-    console.log(studentsObj);
     document.querySelector(`#calender`).classList.remove('hidden');
 }
 
-let cleaningNum = '';
 for (let i = 0; i < studentsObj.length; i++) {
     cleaningNum += `${studentsObj[i]['name']} : ${studentsObj[i]['cleaning_num']}번\n`; 
 }
 
-console.log(cleaningNum);
+document.querySelector('#show-cleaning-num').addEventListener('click', showCleaningNum);
 
 if (yearMonth == null) {
     document.querySelector(`#calender`).classList.add('hidden');

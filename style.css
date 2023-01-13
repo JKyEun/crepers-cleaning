@@ -20,6 +20,10 @@
   width: 100%;
 }
 
+.startend-input {
+  width: 130px;
+}
+
 table {
   margin: 0 auto;
   margin-top: 30px;
@@ -145,4 +149,9 @@ li {
 
 h2 {
   font-size : 25px;
+}
+
+#cleaning-num {
+  text-align: center;
+  line-height: 30px;
 }

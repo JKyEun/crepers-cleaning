@@ -67,7 +67,7 @@ function studentFinSubmit(event) {
     location.reload();
 }
 
-document.addEventListener("submit", studentSubmit)
+studentForm.addEventListener("submit", studentSubmit)
 
 const savedStudents = localStorage.getItem(STUDENTS_KEY);
 const savedStudentsFin = localStorage.getItem(STUDENTSFIN_KEY);
