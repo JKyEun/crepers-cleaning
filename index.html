@@ -30,23 +30,23 @@
     <br>
     <form class="hidden" id="yearmonth-form">
         학기 시작일:
-        <input id="start-year" class="text-input startend-input" placeholder="ex)2023" required/>년 
+        <input type="number" id="start-year" class="text-input startend-input" placeholder="ex)2023" required/>년 
         <select id="start-month" name="month" class="text-input startend-input">
             <option value="3">3</option>
             <option value="9">9</option>
         </select>월
-        <input id="start-day" class="text-input startend-input" placeholder="ex)1" required/>일
+        <input type="number" id="start-day" class="text-input startend-input" placeholder="ex)1" required/>일
         <br>
         학기 종료일:
-        <input id="end-year" class="text-input startend-input" placeholder="ex)2023" required/>년
+        <input type="number" id="end-year" class="text-input startend-input" placeholder="ex)2023" required/>년
         <select id="end-month" class="text-input startend-input">
             <option value="6">6</option>
             <option value="12">12</option>
         </select>월
-        <input id="end-day" class="text-input startend-input" placeholder="ex)14" required/>일
+        <input type="number" id="end-day" class="text-input startend-input" placeholder="ex)14" required/>일
         <br>
-        <button id="go-first2" class="btn">처음으로</button>
-        <input type="submit" id="fin-button2" class="btn" value="작성 완료"/>
+        <input type="button" id="go-first" class="btn" value="처음으로" />
+        <input type="submit" id="fin-button2" class="btn" value="작성 완료" />
     </form>
     </div>
     <div id='calender' class='rap hidden'>
@@ -54,7 +54,7 @@
         <div class="header">
             <h2 class='dateTitle'></h2>
             <div class="buttons">
-                <button id="go-pre" class="btn">뒤로가기</button><button id="show-cleaning-num" class="btn">학생별 청소횟수 보기</button>
+                <button id="go-pre" class="btn">이전 페이지</button><button id="show-cleaning-num" class="btn">학생별 청소횟수 보기</button>
             </div>
         </div>  
         <div class="grid dateHead">
@@ -67,7 +67,8 @@
           <div>토</div>
         </div>
         <div class="grid dateBoard"></div>
-      </div>
+    </div>
+    <div class="basic-page"><button id="all-delete" class="btn">모두 지우기</button></div>
     <script src="js/student-list.js"></script>
     <script src="js/insert-information.js"></script>
     <script src="js/calender-show.js"></script>

@@ -50,7 +50,7 @@ td {
 
 #yearmonth-form {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .dateHead div {
@@ -154,4 +154,8 @@ h2 {
 #cleaning-num {
   text-align: center;
   line-height: 30px;
+}
+
+#all-delete {
+  margin-bottom: 50px;
 }

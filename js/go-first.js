@@ -11,11 +11,20 @@ function goPre() {
     }
 }
 
-function goFirst2() {
+function goFirst() {
     localStorage.removeItem('studentsfin');
-    localStorage.removeItem('yearmonth');
     location.reload();
 }
 
+function allDelete() {
+    localStorage.removeItem('students');
+    localStorage.removeItem('studentsfin');
+    localStorage.removeItem('checkArr');
+    localStorage.removeItem('yearmonth');
+    localStorage.removeItem('yearmonth-copy');
+    location.reload();
+}
+
+document.querySelector('#all-delete').addEventListener('click', allDelete);
 document.querySelector('#go-pre').addEventListener('click', goPre);
-document.querySelector('#go-first2').addEventListener('click', goFirst2);
+document.querySelector('#go-first').addEventListener('click', goFirst);

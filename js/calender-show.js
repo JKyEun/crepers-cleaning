@@ -352,10 +352,6 @@ function makeCleaningSchedule() {
     }
 }
 
-function showNum() {
-    alert(cleaningNum);
-}
-
 function showCleaningNum() {
     if (isHiding) {
         document.querySelector('#cleaning-num').innerText = cleaningNum;
