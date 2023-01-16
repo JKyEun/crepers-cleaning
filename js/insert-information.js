@@ -67,19 +67,17 @@ function wrongMonthInput() {
 
 function getYearMonth() {
     const startYear = document.getElementById('start-year').value;
-    const startMonthList = document.getElementById("start-month");
-    const startMonth = startMonthList.options[startMonthList.selectedIndex].value;
+    const startMonth = document.getElementById("start-month").value;
     const startDay = document.getElementById('start-day').value;
     const endYear = document.getElementById('end-year').value;
-    const endMonthList = document.getElementById("end-month");
-    const endMonth = endMonthList.options[endMonthList.selectedIndex].value;
+    const endMonth = document.getElementById("end-month").value;
     const endDay = document.getElementById('end-day').value;
     const yearMonth = [startYear, startMonth, startDay, endYear, endMonth, endDay];
 
     if (startYear != endYear) {
         return wrongYearInput();
     }
-    if (endMonth - startMonth != 3) {
+    if (startMonth - endMonth > 0) {
         return wrongMonthInput();
     }
     
@@ -92,7 +90,8 @@ function cannotCleanAllDay() {
     alert('모든 요일에 청소 불가능한 학생이 존재합니다.');
 }
 
-function informationSubmit() {
+function informationSubmit(event) {
+    event.preventDefault();
     getYearMonth();
     isChecked();
     document.querySelector(`#calender`).classList.remove('hidden');
@@ -107,22 +106,14 @@ function rememberForm() {
     const startMonth = parseInt(yearMonth[1]);
     const startDay = parseInt(yearMonth[2]);
     const endYear = parseInt(yearMonth[3]);
+    const endMonth = parseInt(yearMonth[4]);
     const endDay = parseInt(yearMonth[5]);
-    const startMonthList = document.getElementById("start-month");
-    const endMonthList = document.getElementById("end-month");
-    let monthIndex = 0;
-
-    if (startMonth == 3) {
-        monthIndex = 0;
-    } else {
-        monthIndex = 1;
-    }
 
     document.getElementById('start-year').value = startYear;
-    startMonthList.options[monthIndex].selected = true;
+    document.getElementById('start-month').value = startMonth;
     document.getElementById('start-day').value = startDay;
     document.getElementById('end-year').value = endYear;
-    endMonthList.options[monthIndex].selected = true;
+    document.getElementById('end-month').value = endMonth;
     document.getElementById('end-day').value = endDay;
 }
 

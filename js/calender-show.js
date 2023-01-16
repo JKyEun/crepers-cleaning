@@ -1,18 +1,3 @@
-const yearMonth = JSON.parse(localStorage.getItem('yearmonth'));
-const startYear = parseInt(yearMonth[0]);
-const startMonth = parseInt(yearMonth[1]);
-const startDay = parseInt(yearMonth[2]);
-const endYear = parseInt(yearMonth[3]);
-const endMonth = parseInt(yearMonth[4]);
-const endDay = parseInt(yearMonth[5]);
-
-const date = new Date(startYear, (startMonth-1), startDay);
-const firstDay = date.getDay();
-let lastDay = new Date(startYear, startMonth, 0).getDate();
-let newStartMonth = '';
-let studentsObj = [];
-let cleaningNum = '';
-let isHiding = true;
 const holidays = [
 20230101,
 20230121,
@@ -139,35 +124,46 @@ const holidays = [
 20291009,
 20291225
 ]
+const yearMonth = JSON.parse(localStorage.getItem('yearmonth'));
+let newStartMonth = '';
+let studentsObj = [];
+let cleaningNum = '';
+let isHiding = true;
 
 function makeCalendar() {
+    const startYear = parseInt(yearMonth[0]);
+    const startMonth = parseInt(yearMonth[1]);
+    const startDay = parseInt(yearMonth[2]);
+    const endMonth = parseInt(yearMonth[4]);
+    const endDay = parseInt(yearMonth[5]);
+    const date = new Date(startYear, (startMonth-1), startDay);
+    const firstDay = date.getDay();
+    let lastDay = new Date(startYear, startMonth, 0).getDate();
     let htmlDummy = '';
-
+    let currentMonth = startMonth;
+    let count = startDay;
+        
     for (let i = 0; i < firstDay; i++) {
         htmlDummy += `<div class="noColor"></div>`;
     }
 
-    htmlDummy += `<div id='M${startMonth}day${startDay}'>${startMonth}월 ${startDay}일</div>`;
-    for (let i = startDay+1; i <= lastDay; i++) {    
-        htmlDummy += `<div id='M${startMonth}day${i}'>${i}</div>`;
-    }
+    while ((currentMonth != endMonth) || (count != endDay)) {
+        htmlDummy += `<div id='M${currentMonth}day${count}'>${currentMonth}월 ${count}일</div>`;
+        count++;
 
-    for (let j = 1; j <= 2; j++) {
-        lastDay = new Date(startYear, startMonth+j, 0).getDate();
-        htmlDummy += `<div id='M${startMonth+j}day1'>${startMonth+j}월 1일</div>`;
-        for (let i = 2; i <= lastDay; i++) {
-            htmlDummy += `<div id='M${startMonth+j}day${i}'>${i}</div>`;
+        if (count > lastDay) {
+            count = 1;
+            currentMonth++;
+            lastDay = new Date(startYear, currentMonth, 0).getDate();
         }
     }
 
-    htmlDummy += `<div id='M${startMonth+3}day1'>${startMonth+3}월 1일</div>`;
-    for (let i = 2; i <= endDay; i++) {
-        htmlDummy += `<div id='M${startMonth+3}day${i}'>${i}</div>`;
-    }
-
     document.querySelector(`.dateBoard`).innerHTML = htmlDummy;
-    document.querySelector(`.dateTitle`).innerText = 
-    `${startYear}년 ${startMonth}월, ${startMonth+1}월, ${startMonth+2}월, ${startMonth+3}월`;
+    let allMonth = `${startYear}년 `;
+    for (let i = 0; i <= (endMonth-startMonth); i++) {
+        allMonth += `${startMonth+i}월 `;
+    }
+    document.querySelector(`.dateTitle`).innerText = allMonth;
 }
 
 function makeStudentsObj() {
@@ -213,113 +209,57 @@ function noCleaningPerson() {
 }
 
 function makeCleaningSchedule() {
+    const startYear = parseInt(yearMonth[0]);
+    const startMonth = parseInt(yearMonth[1]);
+    const startDay = parseInt(yearMonth[2]);
+    const endMonth = parseInt(yearMonth[4]);
+    const endDay = parseInt(yearMonth[5]);
+    let lastDay = new Date(startYear, startMonth, 0).getDate();
     let currentDay = 0;
     let currentDate = 0;
-    let count = 0;
+    let currentMonth = startMonth;
+    let count = startDay;
+    let index = 0;
 
-    lastDay = new Date(startYear, startMonth, 0).getDate();
-    for (let i = startDay; i <= lastDay; i++) {
+    lastDay = new Date(startYear, currentMonth, 0).getDate();
+    while ((currentMonth != endMonth) || (count != endDay)) {
         shuffle(studentsObj);
-        currentDay = new Date(startYear, startMonth-1, i).getDay();
-        currentDate = parseInt(String(startYear) + getZero(startMonth) + getZero(i));
+        currentDay = new Date(startYear, currentMonth-1, count).getDay();
+        currentDate = parseInt(String(startYear) + getZero(currentMonth) + getZero(count));
         if (currentDay != 0 && currentDay != 6 && !(holidays.includes(currentDate))) {
             cleaningNumSort(studentsObj);
-            count = 0;
-            while (studentsObj[count]['available_day'][currentDay-1]) {
-                count++;
-                if (count == studentsObj.length) {
+            index = 0;
+            while (studentsObj[index]['available_day'][currentDay-1]) {
+                index++;
+                if (index == studentsObj.length) {
                     return noCleaningPerson();
                 }
             }
-            document.querySelector(`#M${startMonth}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
-            studentsObj[count]['cleaning_num']++;
+            document.querySelector(`#M${currentMonth}day${count}`).innerHTML += `<br>${studentsObj[index].name}`;
+            studentsObj[index]['cleaning_num']++;
 
-            let compare = studentsObj[count];
+            let compare = studentsObj[index];
             cleaningNumSort(studentsObj);
-            count = 0;
-            while ((compare == studentsObj[count]) || studentsObj[count]['available_day'][currentDay-1]) {
-                count++;
-                if (count == studentsObj.length) {
+            index = 0;
+            while ((compare == studentsObj[index]) || studentsObj[index]['available_day'][currentDay-1]) {
+                index++;
+                if (index == studentsObj.length) {
                     return noCleaningPerson();
                 }
             }
-            document.querySelector(`#M${startMonth}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
-            studentsObj[count]['cleaning_num']++;
+            document.querySelector(`#M${currentMonth}day${count}`).innerHTML += `<br>${studentsObj[index].name}`;
+            studentsObj[index]['cleaning_num']++;
         } else if (currentDay == 6) {
-            document.querySelector(`#M${startMonth}day${i}`).classList.add('blue');
+            document.querySelector(`#M${currentMonth}day${count}`).classList.add('blue');
         } else {
-            document.querySelector(`#M${startMonth}day${i}`).classList.add('red');
+            document.querySelector(`#M${currentMonth}day${count}`).classList.add('red');
         }
-    }
+        count++;
 
-     for (let j = 1; j <= 2; j++) {
-        lastDay = new Date(startYear, startMonth+j, 0).getDate();
-        for (let i = 1; i <= lastDay; i++) {
-            shuffle(studentsObj);
-            currentDay = new Date(startYear, startMonth-1+j, i).getDay();
-            currentDate = parseInt(String(startYear) + getZero(startMonth+j) + getZero(i));
-            if (currentDay != 0 && currentDay != 6 && !(holidays.includes(currentDate))) {
-                cleaningNumSort(studentsObj);
-                count = 0;
-                while (studentsObj[count]['available_day'][currentDay-1]) {
-                    count++;
-                    if (count == studentsObj.length) {
-                        return noCleaningPerson();
-                    }
-                }
-                document.querySelector(`#M${startMonth+j}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
-                studentsObj[count]['cleaning_num']++;
-
-                let compare = studentsObj[count];
-                cleaningNumSort(studentsObj);
-                count = 0;
-                while ((compare == studentsObj[count]) || studentsObj[count]['available_day'][currentDay-1]) {
-                    count++;
-                    if (count == studentsObj.length) {
-                        return noCleaningPerson();
-                    }
-                }
-                document.querySelector(`#M${startMonth+j}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
-                studentsObj[count]['cleaning_num']++;
-            } else if (currentDay == 6) {
-                document.querySelector(`#M${startMonth+j}day${i}`).classList.add('blue');
-            } else {
-                document.querySelector(`#M${startMonth+j}day${i}`).classList.add('red');
-            }
-        }
-    }
-
-    for (let i = 1; i <= endDay; i++) {  
-        shuffle(studentsObj); 
-        currentDay = new Date(startYear, startMonth+2, i).getDay();
-        currentDate = parseInt(String(startYear) + getZero(startMonth+3) + getZero(i));
-        if (currentDay != 0 && currentDay != 6 && !(holidays.includes(currentDate))) {
-            cleaningNumSort(studentsObj);
-            count = 0;
-            while (studentsObj[count]['available_day'][currentDay-1]) {
-                count++;
-                if (count == studentsObj.length) {
-                    return noCleaningPerson();
-                }
-            }
-            document.querySelector(`#M${startMonth+3}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
-            studentsObj[count]['cleaning_num']++;
-
-            let compare = studentsObj[count];
-            cleaningNumSort(studentsObj);
-            count = 0;
-            while ((compare == studentsObj[count]) || studentsObj[count]['available_day'][currentDay-1]) {
-                count++;
-                if (count == studentsObj.length) {
-                    return noCleaningPerson();
-                }
-            }
-            document.querySelector(`#M${startMonth+3}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
-            studentsObj[count]['cleaning_num']++;
-        } else if (currentDay == 6) {
-            document.querySelector(`#M${startMonth+3}day${i}`).classList.add('blue');
-        } else {
-            document.querySelector(`#M${startMonth+3}day${i}`).classList.add('red');
+        if (count > lastDay) {
+            count = 1;
+            currentMonth++;
+            lastDay = new Date(startYear, currentMonth, 0).getDate();
         }
     }
     cleaningNumSort(studentsObj);

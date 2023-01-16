@@ -31,18 +31,12 @@
     <form class="hidden" id="yearmonth-form">
         학기 시작일:
         <input type="number" id="start-year" class="text-input startend-input" placeholder="ex)2023" required/>년 
-        <select id="start-month" name="month" class="text-input startend-input">
-            <option value="3">3</option>
-            <option value="9">9</option>
-        </select>월
+        <input type="number" id="start-month" class="text-input startend-input" placeholder="ex)9" required/>월
         <input type="number" id="start-day" class="text-input startend-input" placeholder="ex)1" required/>일
         <br>
         학기 종료일:
         <input type="number" id="end-year" class="text-input startend-input" placeholder="ex)2023" required/>년
-        <select id="end-month" class="text-input startend-input">
-            <option value="6">6</option>
-            <option value="12">12</option>
-        </select>월
+        <input type="number" id="end-month" class="text-input startend-input" placeholder="ex)12" required/>월
         <input type="number" id="end-day" class="text-input startend-input" placeholder="ex)14" required/>일
         <br>
         <input type="button" id="go-first" class="btn" value="처음으로" />
