@@ -35,6 +35,12 @@ function isChecked() {
         }
     }
     localStorage.setItem('checkArr', JSON.stringify(checkArr));
+    const getCheckArr = JSON.parse(localStorage.getItem('checkArr'));
+    for (let i = 0; i < getCheckArr.length; i++) {
+        if (getCheckArr[i][0] && getCheckArr[i][1] && getCheckArr[i][2] && getCheckArr[i][3] && getCheckArr[i][4]) {
+            return cannotCleanAllDay();
+        }
+    }
 }
 
 function wrongYearInput() {
@@ -67,9 +73,14 @@ function getYearMonth() {
     localStorage.setItem('yearmonth-copy', JSON.stringify(yearMonth));
 }
 
+function cannotCleanAllDay() {
+    localStorage.removeItem('yearmonth');
+    alert('모든 요일에 청소 불가능한 학생이 존재합니다.');
+}
+
 function informationSubmit() {
-    isChecked();
     getYearMonth();
+    isChecked();
     document.querySelector(`#calender`).classList.remove('hidden');
     document.querySelector('#week-table').classList.add('hidden');
     document.querySelector('#yearmonth-form').classList.add('hidden');
