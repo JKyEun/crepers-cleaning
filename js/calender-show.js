@@ -147,7 +147,7 @@ function makeCalendar() {
         htmlDummy += `<div class="noColor"></div>`;
     }
 
-    htmlDummy += `<div id='M${startMonth}day1'>${startMonth}월 ${startDay}일</div>`;
+    htmlDummy += `<div id='M${startMonth}day${startDay}'>${startMonth}월 ${startDay}일</div>`;
     for (let i = startDay+1; i <= lastDay; i++) {    
         htmlDummy += `<div id='M${startMonth}day${i}'>${i}</div>`;
     }
@@ -205,7 +205,6 @@ function noCleaningPerson() {
     if (localStorage.getItem('checkArr') != null) {
         for (let i = 0; i < studentName.length; i++) {
             for (let j = 1; j <= 5; j++) {
-                console.log(document.getElementById(`studentcheck${i}`).querySelector(`#checkbox${j}`));
                 document.getElementById(`studentcheck${i}`).querySelector(`#checkbox${j}`).checked = getCheckArr[i][j]
             }
         }
@@ -227,10 +226,10 @@ function makeCleaningSchedule() {
             cleaningNumSort(studentsObj);
             count = 0;
             while (studentsObj[count]['available_day'][currentDay-1]) {
+                count++;
                 if (count == studentsObj.length) {
                     return noCleaningPerson();
                 }
-                count++;
             }
             document.querySelector(`#M${startMonth}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
             studentsObj[count]['cleaning_num']++;
@@ -239,10 +238,10 @@ function makeCleaningSchedule() {
             cleaningNumSort(studentsObj);
             count = 0;
             while ((compare == studentsObj[count]) || studentsObj[count]['available_day'][currentDay-1]) {
+                count++;
                 if (count == studentsObj.length) {
                     return noCleaningPerson();
                 }
-                count++;
             }
             document.querySelector(`#M${startMonth}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
             studentsObj[count]['cleaning_num']++;
@@ -255,7 +254,7 @@ function makeCleaningSchedule() {
 
      for (let j = 1; j <= 2; j++) {
         lastDay = new Date(startYear, startMonth+j, 0).getDate();
-        for (let i = startDay; i <= lastDay; i++) {
+        for (let i = 1; i <= lastDay; i++) {
             shuffle(studentsObj);
             currentDay = new Date(startYear, startMonth-1+j, i).getDay();
             currentDate = parseInt(String(startYear) + getZero(startMonth+j) + getZero(i));
@@ -263,10 +262,10 @@ function makeCleaningSchedule() {
                 cleaningNumSort(studentsObj);
                 count = 0;
                 while (studentsObj[count]['available_day'][currentDay-1]) {
+                    count++;
                     if (count == studentsObj.length) {
                         return noCleaningPerson();
                     }
-                    count++;
                 }
                 document.querySelector(`#M${startMonth+j}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
                 studentsObj[count]['cleaning_num']++;
@@ -275,10 +274,10 @@ function makeCleaningSchedule() {
                 cleaningNumSort(studentsObj);
                 count = 0;
                 while ((compare == studentsObj[count]) || studentsObj[count]['available_day'][currentDay-1]) {
+                    count++;
                     if (count == studentsObj.length) {
                         return noCleaningPerson();
                     }
-                    count++;
                 }
                 document.querySelector(`#M${startMonth+j}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
                 studentsObj[count]['cleaning_num']++;
@@ -298,10 +297,10 @@ function makeCleaningSchedule() {
             cleaningNumSort(studentsObj);
             count = 0;
             while (studentsObj[count]['available_day'][currentDay-1]) {
+                count++;
                 if (count == studentsObj.length) {
                     return noCleaningPerson();
                 }
-                count++;
             }
             document.querySelector(`#M${startMonth+3}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
             studentsObj[count]['cleaning_num']++;
@@ -310,10 +309,10 @@ function makeCleaningSchedule() {
             cleaningNumSort(studentsObj);
             count = 0;
             while ((compare == studentsObj[count]) || studentsObj[count]['available_day'][currentDay-1]) {
+                count++;
                 if (count == studentsObj.length) {
                     return noCleaningPerson();
                 }
-                count++;
             }
             document.querySelector(`#M${startMonth+3}day${i}`).innerHTML += `<br>${studentsObj[count].name}`;
             studentsObj[count]['cleaning_num']++;
