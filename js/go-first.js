@@ -25,6 +25,11 @@ function allDelete() {
     location.reload();
 }
 
+function showManual() {
+    window.open("https://github.com/JKyEun/crepers-cleaning#%EC%82%AC%EC%9A%A9%EB%B2%95", "_blank");
+}
+
 document.querySelector('#all-delete').addEventListener('click', allDelete);
 document.querySelector('#go-pre').addEventListener('click', goPre);
 document.querySelector('#go-first').addEventListener('click', goFirst);
+document.querySelector('#manual').addEventListener('click', showManual);
