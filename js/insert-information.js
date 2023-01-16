@@ -26,6 +26,7 @@ function makeTable() {
 
 function isChecked() {
     let checkArr2 = [];
+    let countArr = [0, 0, 0, 0, 0];
     for (let i = 0; i < (studentName.length * 5); i++) {
         let checkBox = document.getElementsByName('checkbox');
         checkArr2.push(checkBox[i].checked);
@@ -40,7 +41,20 @@ function isChecked() {
         if (getCheckArr[i][0] && getCheckArr[i][1] && getCheckArr[i][2] && getCheckArr[i][3] && getCheckArr[i][4]) {
             return cannotCleanAllDay();
         }
+        for (let j = 0; j < 5; j++) {
+            if (getCheckArr[i][j]) {
+                countArr[j]++;
+            }
+            if (countArr[j] == studentName.length) {
+                return allStudentCannotClean();
+            }
+        }
     }
+}
+
+function allStudentCannotClean() {
+    localStorage.removeItem('yearmonth');
+    alert('모든 학생이 청소할 수 없는 요일이 존재합니다.');
 }
 
 function wrongYearInput() {
