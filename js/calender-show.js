@@ -147,7 +147,7 @@ function makeCalendar() {
         htmlDummy += `<div class="noColor"></div>`;
     }
 
-    while ((currentMonth != endMonth) || (count != endDay)) {
+    while ((currentMonth != endMonth) || (count != endDay+1)) {
         htmlDummy += `<div id='M${currentMonth}day${count}'>${currentMonth}월 ${count}일</div>`;
         count++;
 
@@ -222,7 +222,7 @@ function makeCleaningSchedule() {
     let index = 0;
 
     lastDay = new Date(startYear, currentMonth, 0).getDate();
-    while ((currentMonth != endMonth) || (count != endDay)) {
+    while ((currentMonth != endMonth) || (count != endDay+1)) {
         shuffle(studentsObj);
         currentDay = new Date(startYear, currentMonth-1, count).getDay();
         currentDate = parseInt(String(startYear) + getZero(currentMonth) + getZero(count));

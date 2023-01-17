@@ -77,7 +77,13 @@ function getYearMonth() {
     if (startYear != endYear) {
         return wrongYearInput();
     }
-    if (startMonth > endMonth) {
+    if (startMonth - endMonth > 0) {
+        return wrongMonthInput();
+    }
+    if (startMonth < 1 || startMonth > 12) {
+        return wrongMonthInput();
+    }
+    if (endMonth < 1 || endMonth > 12) {
         return wrongMonthInput();
     }
     
