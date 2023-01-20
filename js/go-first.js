@@ -1,7 +1,7 @@
-function goPre() {
+function goPre() { // 이전 페이지 버튼
     localStorage.removeItem('yearmonth');
     location.reload();
-    if (localStorage.getItem('checkArr') != null) {
+    if (localStorage.getItem('checkArr') != null) { // 체크박스 기억하기 위한 코드
         for (let i = 0; i < studentName.length; i++) {
             for (let j = 1; j <= 5; j++) {
                 console.log(document.getElementById(`studentcheck${i}`).querySelector(`#checkbox${j}`));
@@ -11,12 +11,12 @@ function goPre() {
     }
 }
 
-function goFirst() {
+function goFirst() { // 처음으로 버튼
     localStorage.removeItem('studentsfin');
     location.reload();
 }
 
-function allDelete() {
+function allDelete() { // 모두 지우기 버튼
     localStorage.removeItem('students');
     localStorage.removeItem('studentsfin');
     localStorage.removeItem('checkArr');
@@ -25,7 +25,7 @@ function allDelete() {
     location.reload();
 }
 
-function showManual() {
+function showManual() { // 깃헙 사용법에 링크
     window.open("https://github.com/JKyEun/crepers-cleaning#%EC%82%AC%EC%9A%A9%EB%B2%95", "_blank");
 }
 

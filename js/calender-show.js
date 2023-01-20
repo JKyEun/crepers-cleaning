@@ -125,12 +125,16 @@ const holidays = [
 20291225
 ]
 const yearMonth = JSON.parse(localStorage.getItem('yearmonth'));
+const dateBoard = document.querySelector(`.dateBoard`);
+const dateTitle = document.querySelector(`.dateTitle`);
+const cleaningNumDiv = document.querySelector('#cleaning-num');
+const cleaningNumBtn = document.querySelector('#show-cleaning-num');
 let newStartMonth = '';
 let studentsObj = [];
 let cleaningNum = '';
 let isHiding = true;
 
-function makeCalendar() {
+function makeCalendar() { // 날짜를 받아와 달력을 만드는 함수
     const startYear = parseInt(yearMonth[0]);
     const startMonth = parseInt(yearMonth[1]);
     const startDay = parseInt(yearMonth[2]);
@@ -143,11 +147,11 @@ function makeCalendar() {
     let currentMonth = startMonth;
     let count = startDay;
         
-    for (let i = 0; i < firstDay; i++) {
+    for (let i = 0; i < firstDay; i++) { // 달의 첫째날 전까지 회색으로 처리
         htmlDummy += `<div class="noColor"></div>`;
     }
 
-    while ((currentMonth != endMonth) || (count != endDay+1)) {
+    while ((currentMonth != endMonth) || (count != endDay+1)) { // 현재 월이 마지막 월이고 count(현재 일)가 endDay+1과 같아지면 종료됨
         htmlDummy += `<div id='M${currentMonth}day${count}'>${currentMonth}월 ${count}일</div>`;
         count++;
 
@@ -158,15 +162,15 @@ function makeCalendar() {
         }
     }
 
-    document.querySelector(`.dateBoard`).innerHTML = htmlDummy;
+    dateBoard.innerHTML = htmlDummy;
     let allMonth = `${startYear}년 `;
     for (let i = 0; i <= (endMonth-startMonth); i++) {
         allMonth += `${startMonth+i}월 `;
     }
-    document.querySelector(`.dateTitle`).innerText = allMonth;
+    dateTitle.innerText = allMonth;
 }
 
-function makeStudentsObj() {
+function makeStudentsObj() { // 학생들의 이름, 청소 불가능 요일, 청소 횟수 등을 담은 객체배열
     for (let i = 0; i < studentName.length; i++) {
         studentsObj[i] = {
             name: studentName[i].text,
@@ -176,17 +180,17 @@ function makeStudentsObj() {
     }
 }
 
-function cleaningNumSort(arr) {
+function cleaningNumSort(arr) { // 청소 횟수로 객체배열을 정렬
     arr.sort((a, b) => 
     a.cleaning_num - b.cleaning_num
 );
 }
 
-function shuffle(arr) {
+function shuffle(arr) { // 객체배열 무작위로 섞는 함수
     arr.sort(() => Math.random() - 0.5);
 }
 
-function getZero(Num) {
+function getZero(Num) { // hoilday와 비교를 위해 10 아래 숫자들은 앞에 0을 붙여줌
     if (Num < 10) {
         newNum = '0'+String(Num);
         return newNum;
@@ -195,7 +199,8 @@ function getZero(Num) {
     }
 }
 
-function noCleaningPerson() {
+function noCleaningPerson() { // 청소할 사람이 없는 경우
+    alert('특정 요일에 청소할 인원이 부족합니다.');
     localStorage.removeItem('yearmonth');
     location.reload();
     if (localStorage.getItem('checkArr') != null) {
@@ -205,10 +210,9 @@ function noCleaningPerson() {
             }
         }
     }
-    alert('특정 요일에 청소할 인원이 부족합니다.');
 }
 
-function makeCleaningSchedule() {
+function makeCleaningSchedule() { // 청소 일정을 넣는 함수
     const startYear = parseInt(yearMonth[0]);
     const startMonth = parseInt(yearMonth[1]);
     const startDay = parseInt(yearMonth[2]);
@@ -223,13 +227,13 @@ function makeCleaningSchedule() {
 
     lastDay = new Date(startYear, currentMonth, 0).getDate();
     while ((currentMonth != endMonth) || (count != endDay+1)) {
-        shuffle(studentsObj);
+        shuffle(studentsObj); // 새로고침 시 바뀔 수 있도록
         currentDay = new Date(startYear, currentMonth-1, count).getDay();
         currentDate = parseInt(String(startYear) + getZero(currentMonth) + getZero(count));
         if (currentDay != 0 && currentDay != 6 && !(holidays.includes(currentDate))) {
             cleaningNumSort(studentsObj);
             index = 0;
-            while (studentsObj[index]['available_day'][currentDay-1]) {
+            while (studentsObj[index]['available_day'][currentDay-1]) { // 0번 인덱스부터 1씩 증가시키며 가능한 사람을 찾는다.
                 index++;
                 if (index == studentsObj.length) {
                     return noCleaningPerson();
@@ -241,7 +245,7 @@ function makeCleaningSchedule() {
             let compare = studentsObj[index];
             cleaningNumSort(studentsObj);
             index = 0;
-            while ((compare == studentsObj[index]) || studentsObj[index]['available_day'][currentDay-1]) {
+            while ((compare == studentsObj[index]) || studentsObj[index]['available_day'][currentDay-1]) { // 한명이 하루에 두번배정되지 않도록 가능한 사람을 찾는다.
                 index++;
                 if (index == studentsObj.length) {
                     return noCleaningPerson();
@@ -265,17 +269,17 @@ function makeCleaningSchedule() {
     cleaningNumSort(studentsObj);
 }
 
-function showCleaningNum() {
+function showCleaningNum() { // 청소 횟수 보기/닫기
     if (isHiding) {
-        document.querySelector('#cleaning-num').innerText = cleaningNum;
-        document.querySelector('#cleaning-num').classList.remove('hidden');
+        cleaningNumDiv.innerText = cleaningNum;
+        cleaningNumDiv.classList.remove('hidden');
         isHiding = false;
-        document.querySelector('#show-cleaning-num').innerText = '학생별 청소횟수 닫기';
+        cleaningNumBtn.innerText = '학생별 청소횟수 닫기';
     } else {
-        document.querySelector('#cleaning-num').innerText = '';
-        document.querySelector('#cleaning-num').classList.add('hidden');
+        cleaningNumDiv.innerText = '';
+        cleaningNumDiv.classList.add('hidden');
         isHiding = true;
-        document.querySelector('#show-cleaning-num').innerText = '학생별 청소횟수 보기';
+        cleaningNumBtn.innerText = '학생별 청소횟수 보기';
     }
 }
 
@@ -283,15 +287,15 @@ if (yearMonth != null) {
     makeStudentsObj();
     makeCalendar();
     makeCleaningSchedule();
-    document.querySelector(`#calender`).classList.remove('hidden');
+    calender.classList.remove('hidden');
 }
 
 for (let i = 0; i < studentsObj.length; i++) {
     cleaningNum += `${studentsObj[i]['name']} : ${studentsObj[i]['cleaning_num']}번\n`; 
 }
 
-document.querySelector('#show-cleaning-num').addEventListener('click', showCleaningNum);
+cleaningNumBtn.addEventListener('click', showCleaningNum);
 
 if (yearMonth == null) {
-    document.querySelector(`#calender`).classList.add('hidden');
+    calender.classList.add('hidden');
 }
