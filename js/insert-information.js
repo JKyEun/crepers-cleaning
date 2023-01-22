@@ -99,6 +99,14 @@ function getYearMonth() {   // 연월일을 입력받는 함수
     localStorage.setItem('yearmonth-copy', JSON.stringify(yearMonth)); // 다시 돌아와도 Form을 기억하기 위해 사본 저장
 }
 
+function getCleaningNum() {
+    let cleaningNumArr = [];
+    for (let i = 0; i < studentName.length; i++) {
+        cleaningNumArr.push(document.querySelector(`#cleaning-num-input${i}`).value);
+    }
+    localStorage.setItem('cleaningNumArr', JSON.stringify(cleaningNumArr));
+}
+
 function cannotCleanAllDay() {
     localStorage.removeItem('yearmonth');
     alert('모든 요일에 청소 불가능한 학생이 존재합니다.');
@@ -108,6 +116,7 @@ function informationSubmit(event) { // 모든 정보 제출, 다음 화면으로
     event.preventDefault();
     getYearMonth();
     isChecked();
+    getCleaningNum();
     calender.classList.remove('hidden');
     weekTable.classList.add('hidden');
     yearMonthForm.classList.add('hidden');
@@ -116,6 +125,7 @@ function informationSubmit(event) { // 모든 정보 제출, 다음 화면으로
 
 function rememberForm() {   // 다시 돌아와도 Form 기억
     const yearMonth = JSON.parse(localStorage.getItem('yearmonth-copy'));
+    const cleaningNumArr = JSON.parse(localStorage.getItem('cleaningNumArr'));
     const startYear = parseInt(yearMonth[0]);
     const startMonth = parseInt(yearMonth[1]);
     const startDay = parseInt(yearMonth[2]);
@@ -129,13 +139,14 @@ function rememberForm() {   // 다시 돌아와도 Form 기억
     document.getElementById('end-year').value = endYear;
     document.getElementById('end-month').value = endMonth;
     document.getElementById('end-day').value = endDay;
-}
 
-if (localStorage.getItem('yearmonth-copy') != null) {
-    rememberForm();
+    for (let i = 0; i < cleaningNumArr.length; i++) {
+        document.querySelector(`#cleaning-num-input${i}`).value = cleaningNumArr[i];
+    }
 }
 
 makeTable();
+
 const getCheckArr = JSON.parse(localStorage.getItem('checkArr'));
 if (localStorage.getItem('checkArr') != null) { // 체크박스 기억
     for (let i = 0; i < studentName.length; i++) {
@@ -150,4 +161,8 @@ yearMonthForm.addEventListener("submit", informationSubmit);
 if (localStorage.getItem('yearmonth') != null) {
     weekTable.classList.add('hidden');
     yearMonthForm.classList.add('hidden');
+}
+
+if (localStorage.getItem('yearmonth-copy') != null) {
+    rememberForm();
 }
