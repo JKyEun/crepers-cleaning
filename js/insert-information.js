@@ -8,10 +8,12 @@ function makeTable() { // 청소 불가능 요일을 입력받을 표 생성
         const tr = document.createElement('tr');
         const td = document.createElement('td');
         const td2 = document.createElement('td');
+        const td3 = document.createElement('td');
         td.innerText = studentName[i].text;
         tbody.appendChild(tr);
         tr.appendChild(td);
         tr.appendChild(td2);
+        tr.appendChild(td3);
         td2.id = `studentcheck${i}`;
         for (let j = 0; j < 5; j++) {   // 체크박스 5개 삽입
             const checkBox = document.createElement('input');
@@ -21,6 +23,12 @@ function makeTable() { // 청소 불가능 요일을 입력받을 표 생성
             checkBox.id = `checkbox${j}`    // 각각 다른 id를 가지게 함
             td2.appendChild(checkBox);
         }
+        const numInput = document.createElement('input');
+        numInput.type = 'text';
+        numInput.id = `cleaning-num-input${i}`;
+        numInput.classList.add('cleaning-num-input');
+        numInput.value = 0;
+        td3.appendChild(numInput);
     }
 }
 

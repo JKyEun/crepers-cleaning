@@ -20,6 +20,14 @@
   width: 100%;
 }
 
+.cleaning-num-input {
+  text-align: center;
+  padding : 3px;
+  margin: 11px;
+  max-width: 100px;
+  width: 100%;
+}
+
 .startend-input {
   width: 130px;
 }
