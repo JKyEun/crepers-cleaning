@@ -129,6 +129,7 @@ const dateBoard = document.querySelector(`.dateBoard`);
 const dateTitle = document.querySelector(`.dateTitle`);
 const cleaningNumDiv = document.querySelector('#cleaning-num');
 const cleaningNumBtn = document.querySelector('#show-cleaning-num');
+const cleaningNumArr = JSON.parse(localStorage.getItem('cleaningNumArr'));
 let newStartMonth = '';
 let studentsObj = [];
 let cleaningNum = '';
@@ -175,7 +176,7 @@ function makeStudentsObj() { // 학생들의 이름, 청소 불가능 요일, �
         studentsObj[i] = {
             name: studentName[i].text,
             available_day: getCheckArr[i],
-            cleaning_num: 0
+            cleaning_num: parseInt(cleaningNumArr[i])
         };
     }
 }

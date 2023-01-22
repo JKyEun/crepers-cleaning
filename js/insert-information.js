@@ -24,7 +24,7 @@ function makeTable() { // 청소 불가능 요일을 입력받을 표 생성
             td2.appendChild(checkBox);
         }
         const numInput = document.createElement('input');
-        numInput.type = 'text';
+        numInput.type = 'number';
         numInput.id = `cleaning-num-input${i}`;
         numInput.classList.add('cleaning-num-input');
         numInput.value = 0;
@@ -102,7 +102,11 @@ function getYearMonth() {   // 연월일을 입력받는 함수
 function getCleaningNum() {
     let cleaningNumArr = [];
     for (let i = 0; i < studentName.length; i++) {
-        cleaningNumArr.push(document.querySelector(`#cleaning-num-input${i}`).value);
+        if (document.querySelector(`#cleaning-num-input${i}`).value == "") {
+            cleaningNumArr.push(0);
+        } else {
+            cleaningNumArr.push(document.querySelector(`#cleaning-num-input${i}`).value);
+        }
     }
     localStorage.setItem('cleaningNumArr', JSON.stringify(cleaningNumArr));
 }

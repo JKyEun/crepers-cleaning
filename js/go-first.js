@@ -22,6 +22,7 @@ function allDelete() { // 모두 지우기 버튼
     localStorage.removeItem('checkArr');
     localStorage.removeItem('yearmonth');
     localStorage.removeItem('yearmonth-copy');
+    localStorage.removeItem('cleaningNumArr');
     location.reload();
 }
 
