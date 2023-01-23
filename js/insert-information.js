@@ -23,7 +23,7 @@ function makeTable() { // 청소 불가능 요일을 입력받을 표 생성
             checkBox.id = `checkbox${j}`    // 각각 다른 id를 가지게 함
             td2.appendChild(checkBox);
         }
-        const numInput = document.createElement('input');
+        const numInput = document.createElement('input'); // 누적 청소 횟수 입력칸
         numInput.type = 'number';
         numInput.id = `cleaning-num-input${i}`;
         numInput.classList.add('cleaning-num-input');
@@ -99,7 +99,7 @@ function getYearMonth() {   // 연월일을 입력받는 함수
     localStorage.setItem('yearmonth-copy', JSON.stringify(yearMonth)); // 다시 돌아와도 Form을 기억하기 위해 사본 저장
 }
 
-function getCleaningNum() {
+function getCleaningNum() { // 누적 청소 횟수를 받아오는 함수
     let cleaningNumArr = [];
     for (let i = 0; i < studentName.length; i++) {
         if (document.querySelector(`#cleaning-num-input${i}`).value == "") {
