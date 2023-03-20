@@ -1,75 +1,130 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crepers Cleaning</title>
-    <link rel="stylesheet" href="style.css" />
+    <!-- FAVICON -->
     <link rel="icon" href="crepers-favicon.png" />
-</head>
-<body>
+    <!-- HTML2CANVAS -->
+    <script src="./js/html2canvas.min.js"></script>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="basic-page">
-    <form class="hidden" id="student-form">
-        <input class='text-input'
-        required maxlength="15" type="text" placeholder="청소명단을 입력하세요 (Enter로 입력)"/>
-    </form>
-    <div class="hidden" id="student-list-button">
-    <ul id="student-list"></ul>
-    <div id="student-num"></div>
-    <input type="button" id="fin-button" class="btn" value="명단 작성 완료"/>
-    </div>
+      <form class="hidden" id="student-form">
+        <input
+          class="text-input"
+          required
+          maxlength="15"
+          type="text"
+          placeholder="청소명단을 입력하세요 (Enter로 입력)"
+        />
+      </form>
+      <div class="hidden" id="student-list-button">
+        <ul id="student-list"></ul>
+        <div id="student-num"></div>
+        <input
+          type="button"
+          id="fin-button"
+          class="btn"
+          value="명단 작성 완료"
+        />
+      </div>
     </div>
     <div class="basic-page">
-    <table class="hidden" id="week-table">
+      <table class="hidden" id="week-table">
         <tr>
-            <th>이름</th>
-            <th>안되는 요일 체크<br>(월 화 수 목 금)</th>
-            <th>누적 청소 횟수</th>
+          <th>이름</th>
+          <th>안되는 요일 체크<br />(월 화 수 목 금)</th>
+          <th>누적 청소 횟수</th>
         </tr>
-    </table>
-    <br>
-    <form class="hidden" id="yearmonth-form">
+      </table>
+      <br />
+      <form class="hidden" id="yearmonth-form">
         학기 시작일:
-        <input type="number" id="start-year" class="text-input startend-input" placeholder="ex)2023" required/>년 
-        <input type="number" id="start-month" class="text-input startend-input" placeholder="ex)9" required/>월
-        <input type="number" id="start-day" class="text-input startend-input" placeholder="ex)1" required/>일
-        <br>
+        <input
+          type="number"
+          id="start-year"
+          class="text-input startend-input"
+          placeholder="ex)2023"
+          required
+        />년
+        <input
+          type="number"
+          id="start-month"
+          class="text-input startend-input"
+          placeholder="ex)9"
+          required
+        />월
+        <input
+          type="number"
+          id="start-day"
+          class="text-input startend-input"
+          placeholder="ex)1"
+          required
+        />일
+        <br />
         학기 종료일:
-        <input type="number" id="end-year" class="text-input startend-input" placeholder="ex)2023" required/>년
-        <input type="number" id="end-month" class="text-input startend-input" placeholder="ex)12" required/>월
-        <input type="number" id="end-day" class="text-input startend-input" placeholder="ex)14" required/>일
-        <br>
+        <input
+          type="number"
+          id="end-year"
+          class="text-input startend-input"
+          placeholder="ex)2023"
+          required
+        />년
+        <input
+          type="number"
+          id="end-month"
+          class="text-input startend-input"
+          placeholder="ex)12"
+          required
+        />월
+        <input
+          type="number"
+          id="end-day"
+          class="text-input startend-input"
+          placeholder="ex)14"
+          required
+        />일
+        <br />
         <input type="button" id="go-first" class="btn" value="처음으로" />
         <input type="submit" id="fin-button2" class="btn" value="작성 완료" />
-    </form>
+      </form>
     </div>
-    <div id='calender' class='rap hidden'>
-        <div id="cleaning-num" class="hidden"></div>
-        <div class="header">
-            <h2 class='dateTitle'></h2>
-            <div class="buttons">
-                <button id="go-pre" class="btn">이전 페이지</button>
-                <button id="show-cleaning-num" class="btn">학생별 청소횟수 보기</button>
-            </div>
-        </div>  
-        <div class="grid dateHead">
-          <div>일</div>
-          <div>월</div>
-          <div>화</div>
-          <div>수</div>
-          <div>목</div>
-          <div>금</div>
-          <div>토</div>
+    <div id="calender" class="rap hidden capture-area">
+      <div id="cleaning-num" class="hidden"></div>
+      <div class="header">
+        <h2 class="dateTitle"></h2>
+        <div class="buttons">
+          <button class="btn" onclick="captureExport()">결과 캡처</button>
+          <button id="go-pre" class="btn">이전 페이지</button>
+          <button id="show-cleaning-num" class="btn">
+            학생별 청소횟수 보기
+          </button>
         </div>
-        <div class="grid dateBoard"></div>
+      </div>
+      <div class="grid dateHead">
+        <div>일</div>
+        <div>월</div>
+        <div>화</div>
+        <div>수</div>
+        <div>목</div>
+        <div>금</div>
+        <div>토</div>
+      </div>
+      <div class="grid dateBoard"></div>
     </div>
-    <div class="basic-page"><button id="all-delete" class="btn">모두 지우기</button>
-    <button id="manual" class="btn">사용법 열기</button>
+    <div class="basic-page">
+      <button id="all-delete" class="btn">모두 지우기</button>
+      <button id="manual" class="btn">사용법 열기</button>
     </div>
     <script src="js/student-list.js"></script>
     <script src="js/insert-information.js"></script>
     <script src="js/calender-show.js"></script>
     <script src="js/go-first.js"></script>
-</body>
+    <script src="js/capture.js"></script>
+  </body>
 </html>
